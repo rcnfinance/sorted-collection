@@ -1,0 +1,15 @@
+{
+  "package_name": "sorted-collection",
+  "version": "1.0.0",
+  "description": "An utility library for using sorted list data structures.",
+  "authors": [
+    "Joaquin Pablo Gonzalez <jpgonzalezra@gmail.com>"
+  ],
+  "keywords": [
+    "solidity",
+    "ethereum",
+    "smart",
+    "contracts"
+  ],
+  "license": "MIT"
+}

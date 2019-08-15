@@ -1,0 +1,52 @@
+{
+  "name": "sorted-collection",
+  "version": "1.0.0",
+  "description": "",
+  "main": "truffle-config.js",
+  "files": [
+    "/contracts/**/*.sol",
+    "/build/contracts/*.json",
+    "!/contracts/mocks"
+  ],
+  "scripts": {
+    "console": "truffle console",
+    "lint": "./node_modules/.bin/eslint . && ./node_modules/.bin/solium --dir .",
+    "test": "./scripts/test.sh",
+    "prepare": "./scripts/synchronize-pm.sh"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "pre-push": "npm run test"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ripio/sorted-collection.git"
+  },
+  "author": "Joaquin Pablo Gonzalez <jpgonzalezra@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ripio/sorted-collection/issues"
+  },
+  "homepage": "https://github.com/ripio/sorted-collection#readme",
+  "devDependencies": {
+    "eslint-plugin-import": "^2.18.0",
+    "eth-gas-reporter": "^0.2.9",
+    "husky": "^3.0.0",
+    "eslint": "^6.0.1",
+    "eslint-config-standard": "^13.0.1",
+    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "openzeppelin-test-helpers": "^0.4.2",
+    "bn-chai": "^1.0.1",
+    "chai": "^4.2.0",
+    "coveralls": "^3.0.5",
+    "macaron-cli": "^6.4.1",
+    "rp-solidity-coverage": "^0.5.13",
+    "solium": "^1.2.4",
+    "truffle": "^5.0.30",
+    "truffle-hdwallet-provider": "^1.0.16"
+  }
+}

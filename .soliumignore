@@ -1,0 +1,5 @@
+
+node_modules
+coverageEnv
+.git
+contracts/utils/StringUtils.sol
