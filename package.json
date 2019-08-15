@@ -1,7 +1,7 @@
 {
   "name": "sorted-collection",
   "version": "1.0.0",
-  "description": "",
+  "description": "SortedCollection Contracts is an utility library for using sorted list data structures.",
   "main": "truffle-config.js",
   "files": [
     "/contracts/**/*.sol",
@@ -47,6 +47,7 @@
     "rp-solidity-coverage": "^0.5.13",
     "solium": "^1.2.4",
     "truffle": "^5.0.30",
-    "truffle-hdwallet-provider": "^1.0.16"
+    "truffle-hdwallet-provider": "^1.0.16",
+    "mem": ">=4.0.0"
   }
 }
