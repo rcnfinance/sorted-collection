@@ -7,6 +7,12 @@ const INVALID_TOKEN_ID = new BN(9999);
 
 const SortedStructListMock = artifacts.require('SortedStructListMock.sol');
 
+const median = arr => {
+    const mid = Math.floor(arr.length / 2);
+    const nums = [...arr].sort((a, b) => a - b);
+    return arr.length % 2 !== 0 ? nums[mid] : (nums[mid - 1] + nums[mid]) / 2;
+};
+
 contract('SortedStructListMock', function (accounts) {
     const owner = accounts[0];
     const value = new BN(1);
@@ -28,6 +34,51 @@ contract('SortedStructListMock', function (accounts) {
                 expect(node[0]).to.be.equal(false);
                 expect(node[1]).to.be.bignumber.equal(HEAD);
                 expect(node[2]).to.be.bignumber.equal(HEAD);
+            });
+        });
+
+        describe('media', function () {
+            it('should calculate median (5 elements ramdom)', async function () {
+                const cant = 5;
+                const array = [];
+                for (let i = 0; i < cant; i++) {
+                    const random = Math.floor(Math.random() * 1000000000000);
+                    await this.list.newNode(new BN(random));
+                    const id = await this.list.id();
+                    await this.list.insert(id);
+                    array.push(random);
+                }
+                const medianSortedList = await this.list.median();
+                const medianSortedNative = new BN(median(array));
+                expect(medianSortedList).to.be.bignumber.equal(medianSortedNative);
+            });
+            it('should calculate median (10 elements ramdom)', async function () {
+                const cant = 10;
+                const array = [];
+                for (let i = 0; i < cant; i++) {
+                    const random = Math.floor(Math.random() * 1000000000000);
+                    await this.list.newNode(new BN(random));
+                    const id = await this.list.id();
+                    await this.list.insert(id);
+                    array.push(random);
+                }
+                const medianSortedList = await this.list.median();
+                const medianSortedNative = new BN(median(array));
+                expect(medianSortedList).to.be.bignumber.equal(medianSortedNative);
+            });
+            it('should calculate median (20 elements ramdom)', async function () {
+                const cant = 20;
+                const array = [];
+                for (let i = 0; i < cant; i++) {
+                    const random = Math.floor(Math.random() * 1000000000000);
+                    await this.list.newNode(new BN(random));
+                    const id = await this.list.id();
+                    await this.list.insert(id);
+                    array.push(random);
+                }
+                const medianSortedList = await this.list.median();
+                const medianSortedNative = new BN(median(array));
+                expect(medianSortedList).to.be.bignumber.equal(medianSortedNative);
             });
         });
     });
