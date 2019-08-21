@@ -30,7 +30,7 @@ library SortedList {
     function exists(List storage self, uint256 _node) internal view returns (bool) {
         if (self.list[_node][LEFT] == HEAD && self.list[_node][RIGHT] == HEAD) {
             return (self.list[HEAD][RIGHT] == _node);
-        }
+        } 
         return true;
     }
 

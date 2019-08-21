@@ -37,7 +37,7 @@ contract('SortedStructListMock', function (accounts) {
             });
         });
 
-        describe('media', function () {
+        describe('median', function () {
             it('should calculate median (5 elements ramdom)', async function () {
                 const cant = 5;
                 const array = [];
