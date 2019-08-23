@@ -1,4 +1,3 @@
-
 pragma solidity 0.5.10;
 
 /**
@@ -7,7 +6,7 @@ pragma solidity 0.5.10;
  * @dev Delegate for SortedList can know node value.
  */
 interface SortedListDelegate {
-    
+
     /**
      * @dev Get node value
      * @param _id node_id
