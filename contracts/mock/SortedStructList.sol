@@ -16,7 +16,7 @@ contract SortedStructListMock is SortedListDelegate {
         nodes[id] = _value;
         return id;
     }
-    
+
     function getValue(uint256 _id) external view returns (uint256) {
         return nodes[_id];
     }

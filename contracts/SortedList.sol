@@ -56,12 +56,10 @@ library SortedList {
      * @return bool, uint256, uint256 true if node exists or false otherwise, previous node, next node
      */
     function getNode(List storage self, uint256 _node) internal view returns (bool, uint256, uint256) {
-        
         if (!exists(self, _node)) {
             return (false, 0, 0);
-        } 
+        }
         return (true, self.list[_node][LEFT], self.list[_node][RIGHT]);
-    
     }
 
     /**
@@ -94,7 +92,12 @@ library SortedList {
      * @param _node first node for linking
      * @param _link  node to link to in the _direction
      */
-    function createLink(List storage self, uint256 _node, uint256 _link, bool _direction) internal {
+    function createLink(
+        List storage self,
+        uint256 _node,
+        uint256 _link,
+        bool _direction
+    ) internal {
         self.list[_link][!_direction] = _node;
         self.list[_node][_direction] = _link;
     }
@@ -106,17 +109,24 @@ library SortedList {
      * @return bool true if success, false otherwise
      */
     function insert(List storage self, uint256 _node, address _delegate) internal returns (bool) {
-
-        uint256 position = getPosition(self, _node, _delegate);
-        if (exists(self, _node) && !exists(self, position)) {
+        if (exists(self, _node)) {
             return false;
         }
-
+        uint256 position = getPosition(self, _node, _delegate);
         uint256 c = self.list[position][LEFT];
-        createLink(self, position, _node, LEFT);
-        createLink(self, _node, c, LEFT);
+        createLink(
+            self,
+            position,
+            _node,
+            LEFT
+        );
+        createLink(
+            self,
+            _node,
+            c,
+            LEFT
+        );
         return true;
-        
     }
 
     /**
@@ -127,13 +137,11 @@ library SortedList {
      * @return uint256 next node with a value less than _node
      */
     function getPosition(List storage self, uint256 _node, address _delegate) internal view returns (uint256) {
-        
         (, uint256 next) = getAdjacent(self, HEAD);
         while (next != 0 && SortedListDelegate(_delegate).getValue(_node) > SortedListDelegate(_delegate).getValue(next)) {
             next = self.list[next][RIGHT];
         }
         return next;
-
     }
 
     /**
@@ -144,12 +152,10 @@ library SortedList {
      * @return uint256 the node value
      */
     function getValue(List storage self, uint256 _position, address _delegate) internal view returns (uint256) {
-        
         (, uint256 next) = getAdjacent(self, HEAD);
         for (uint256 i = 0; i < _position; i++) {
             next = self.list[next][RIGHT];
         }
-
         return SortedListDelegate(_delegate).getValue(next);
     }
 
@@ -163,7 +169,12 @@ library SortedList {
         if (_node == NULL || !exists(self, _node)) {
             return 0;
         }
-        createLink(self, self.list[_node][LEFT], self.list[_node][RIGHT], RIGHT);
+        createLink(
+            self,
+            self.list[_node][LEFT],
+            self.list[_node][RIGHT],
+            RIGHT
+        );
         delete self.list[_node][LEFT];
         delete self.list[_node][RIGHT];
         return _node;
@@ -176,15 +187,13 @@ library SortedList {
      * @return uint256 the median
      */
     function median(List storage self, address _delegate) internal view returns (uint256) {
-
         uint256 elements = sizeOf(self);
         if (elements % 2 == 0) {
             uint256 sum = getValue(self, elements / 2, _delegate) + getValue(self, elements / 2 - 1, _delegate);
             return sum / 2;
         } else {
             return getValue(self, elements / 2, _delegate);
-        } 
-
+        }
     }
 
 }
