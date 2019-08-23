@@ -106,17 +106,14 @@ library SortedList {
      * @return bool true if success, false otherwise
      */
     function insert(List storage self, uint256 _node, address _delegate) internal returns (bool) {
-
-        uint256 position = getPosition(self, _node, _delegate);
-        if (exists(self, _node) && !exists(self, position)) {
+        if (exists(self, _node)) {
             return false;
         }
-
+        uint256 position = getPosition(self, _node, _delegate);
         uint256 c = self.list[position][LEFT];
         createLink(self, position, _node, LEFT);
         createLink(self, _node, c, LEFT);
         return true;
-        
     }
 
     /**
