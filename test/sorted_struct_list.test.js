@@ -97,6 +97,10 @@ contract('SortedStructListMock', function (accounts) {
                 it('should be greater than zero', async function () {
                     expect(await this.list.sizeOf()).to.be.bignumber.equal(new BN(1));
                 });
+                it('should not add repeted elements to list', async function () {
+                    await this.list.insert(aliceId);
+                    expect(await this.list.sizeOf()).to.be.bignumber.equal(new BN(1));
+                });
             });
 
             describe('exists', function () {
@@ -129,7 +133,6 @@ contract('SortedStructListMock', function (accounts) {
                     expect(new BN(result.logs.length)).to.be.bignumber.equal(new BN(error));
                 });
             });
-
             describe('remove the HEAD node', function () {
                 it('should fail', async function () {
                     const error = 0;
